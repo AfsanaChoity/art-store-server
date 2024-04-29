@@ -29,12 +29,24 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+
+    //database created
+    const userCollection = client.db('artCraft').collection('user');
+
+    //user sent to database
+    app.post('/user', async(req, res) =>{
+        const user = req.body;
+        console.log(user);
+        const result = await userCollection.insertOne(user);
+        res.send(result)
+    });
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    // await client.close();
   }
 }
 run().catch(console.dir);
