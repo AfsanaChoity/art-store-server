@@ -30,16 +30,26 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
-    //database created
+    //database created for user collection
     const userCollection = client.db('artCraft').collection('user');
 
     //user sent to database
     app.post('/user', async(req, res) =>{
         const user = req.body;
-        console.log(user);
+        // console.log(user);
         const result = await userCollection.insertOne(user);
         res.send(result)
     });
+
+    //add product to database
+    const itemCollection = client.db('artCraft').collection('items');
+    app.post('/addItem', async(req, res) =>{
+      const item = req.body;
+      const result = await itemCollection.insertOne(item);
+      console.log(result);
+      res.send(result);
+
+    })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
