@@ -14,10 +14,10 @@ app.use(express.json());
 //mongodb connection
 
 
-// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.lbylvoy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.lbylvoy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 //connected to localhost
-const uri = 'mongodb://localhost:27017';
+// const uri = 'mongodb://localhost:27017';
 
 const client = new MongoClient(uri, {
   serverApi: {
@@ -32,7 +32,7 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
-    //database created for user collection
+    //database created for user 
     const userCollection = client.db('artCraft').collection('user');
 
     //user sent to database
@@ -106,7 +106,7 @@ async function run() {
 
     //create another collection in database
     const artCraftcategorySection = client.db('artCraft').collection('art_craft_section');
-    
+
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
