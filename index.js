@@ -104,6 +104,10 @@ async function run() {
       res.send(result)
     })
 
+    //create another collection in database
+    const artCraftcategorySection = client.db('artCraft').collection('art_craft_section');
+    
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Successfully connected to MongoDB!");
